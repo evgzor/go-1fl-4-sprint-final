@@ -48,7 +48,6 @@ func parsePackage(data string) (int, time.Duration, error) {
 }
 
 func DayActionInfo(data string, weight, height float64) string {
-	// TODO: реализовать функцию
 
 	steps, duration, err := parsePackage(data)
 
@@ -62,6 +61,7 @@ func DayActionInfo(data string, weight, height float64) string {
 	}
 
 	distance := float64(steps) * stepLength / float64(mInKm)
+
 	caloriesWalk, err := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
 
 	if err != nil {
