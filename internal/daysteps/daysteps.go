@@ -18,30 +18,29 @@ const (
 )
 
 func parsePackage(data string) (int, time.Duration, error) {
-	// TODO: реализовать функцию
 	stringSlice := strings.Split(data, ",")
 	if len(stringSlice) != 2 {
-		return 0, 0, fmt.Errorf("некорректный формат данных: %s", data)
+		return 0, 0, fmt.Errorf("incorrect data format: %s", data)
 	}
 
 	steps, err := strconv.Atoi(stringSlice[0])
+
+	if err != nil {
+		return 0, 0, err
+	}
 
 	if steps <= 0 {
 		return 0, 0, fmt.Errorf("steps errors")
 	}
 
+	duration, err := time.ParseDuration(stringSlice[1])
+
 	if err != nil {
 		return 0, 0, err
 	}
-
-	duration, err := time.ParseDuration(stringSlice[1])
 
 	if duration.Seconds() <= 0 {
 		return 0, 0, fmt.Errorf("steps errors")
-	}
-
-	if err != nil {
-		return 0, 0, err
 	}
 
 	return steps, duration, nil
